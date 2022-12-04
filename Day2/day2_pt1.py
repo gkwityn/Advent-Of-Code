@@ -18,26 +18,70 @@ Day2, Pt.1
 """
 def read_file():
     """Return filelist"""
-    path = './data.txt'
+
+    # path = './data.txt'
+    path = 'data.txt'
     file = open(path, 'r', encoding='UTF-8')
     files = file.readlines()
     return files
 
-def rock_paper_sissor():
-    pass
+
+def rock_paper_sissor(game):
+
+    score = 0
+
+    play = game.strip().split(' ')
+    player1 = play[0];
+    player2 = play[1]
+
+    if player2 == 'X':
+        score += 1
+    elif player2 == 'Y':
+        score += 2
+    elif player2 == 'Z':
+        score += 3
+    
+    #Opponent Plays Rock
+    if player1 == 'A':
+        #Paper - You Win
+        if player2 == 'Y':
+            score += 6
+        #Rock - Tie
+        elif player2 == 'X':
+            score += 3
+    
+    #Opponent Plays Paper
+    elif player1 == 'B':
+        #Scissors -You Win
+        if player2 == 'Z':
+            score += 6
+        #Paper - Tie
+        elif player2 == 'Y':
+            score += 3
+    
+    #Opponent Plays Scissors
+    elif player1 == 'C':
+        #Rock - You Win
+        if player2 == 'X':
+           score += 6
+        #Scissors - Tie
+        elif player2 == 'Z':
+            score += 3
+    
+    return score
 
 def main():
     """ Main Function """
+    total = 0
 
     games = read_file()
 
-    game = games[0]
-    play = game.strip().split(' ')
-    player1 = play[0]
-    player2 = play[1]
+    for game in games:
+        total += rock_paper_sissor(game)
+        #print(f"{game.strip()}: {score}")
 
-    win = False
-    if player1 = 
+    print(f"Total: {total}")
+
 
 
 
