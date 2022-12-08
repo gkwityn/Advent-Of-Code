@@ -8,13 +8,9 @@ def read_data():
     
 def is_subset(A, B):
 
-    if len(A.intersection(B)) > 0:
+    if len(A.intersection(B)) > 0 or len(B.intersection(A)) > 0:
         return True
-    elif len(B.intersection(A)) > 0:
-        return True
-    else:
-
-        return False
+    return False
 
 def build_list(section):
     my_list = []
