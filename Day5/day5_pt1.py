@@ -1,50 +1,89 @@
-class cargo:
-    state = ''
-    row_size = -1
-    
-    def build_structure(self):
-        stacks = []
-        lines = self.state.split('\n')
+def build_stack(lines):
+    size = 9
+    stack = []
 
-        for line in lines:
-            crate = line.strip().split(' ')
+    for i in range(0, size):
+        stack.append([])
+
+    for line in lines:
+        j = 0
+        
+        for i in range(0, len(line), 4):
+            if line[i+1] != ' ':
+                stack[j].append(line[i+1])
+            j+=1
+
+    #reverse each column/stack
+    for list in stack:
+        list.reverse()
+
+    return stack
 
 
-def get_stack_state(file):
-    init_cargo = cargo()
+def parse_data(file):
 
     lines = file.readlines()
-    init_state = ''
+    init_state = []
 
     for line in lines:
         if line[1] == '1':
-            rows = line.strip().split(sep='   ')
+            # rows = line.strip().split(sep='   ')
             break
         else:
-            init_state += line
+            init_state.append(line.strip('\n'))
+
+    file.close()
+    return init_state    
         
     
-    init_cargo.row_size = len(rows)
-    init_cargo.state = init_state
-
-    return init_cargo
 
 
 def read_initial_struct():
     #path = './test.txt'
     path = './data.txt'
     file = open(path, 'r', encoding='UTF-8')
-     
-    return get_stack_state(file)
+    init_state = parse_data(file)
+    
+    return init_state
+
+
+def read_instr():
+    path = './data.txt'
+    file = open(path, 'r', encoding='UTF-8')
+    lines = file.readlines()
+
+    instr_list = []
+
+    for line in lines:
+        if 'move' in line:
+            instr_list.append(line)
+    return instr_list
+
+
+def follow_instr(instr_list):
+    
+    for instr in instr_list:
+        f_instr = instr.split(sep=" ")
+        move = f_instr[1]
+        src = f_instr[3]
+        dest = f_instr[5]
+
+
+
 
 
 def main():
     
-    my_cargo = read_initial_struct()
-    my_cargo.build_structure()
-    print(f'State:\n{my_cargo.state}')
-    print(f'RowSize: {my_cargo.row_size}')
+    init_state = read_initial_struct()
+    stack = build_stack(init_state)
+    instr_list = read_instr()
 
+    follow_instr(instr_list)
+
+    # for el in stack:
+    #     print(el)
+    # for single in instr:
+    #     print(single)
 
 main()
     
