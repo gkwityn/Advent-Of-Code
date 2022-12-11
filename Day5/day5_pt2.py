@@ -72,7 +72,7 @@ def follow_instr(instr_list, stack):
         move_list = []
         for i in range(move_num):
             temp = stack[src].pop() 
-            move_list.append(temp)
+            move_list.insert(0, temp)
 
         for el in move_list:
             stack[dest].append(el)
