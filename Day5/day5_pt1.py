@@ -36,8 +36,6 @@ def parse_data(file):
     return init_state    
         
     
-
-
 def read_initial_struct():
     #path = './test.txt'
     path = './data.txt'
@@ -60,17 +58,35 @@ def read_instr():
     return instr_list
 
 
-def follow_instr(instr_list):
+def follow_instr(instr_list, stack):
     
     for instr in instr_list:
+        #Example
+        #move 1 from 2 to 1
         f_instr = instr.split(sep=" ")
-        move = f_instr[1]
-        src = f_instr[3]
-        dest = f_instr[5]
+        move_num = int(f_instr[1])
+        src = int(f_instr[3])-1
+        dest = int(f_instr[5])-1
 
+        move_list = []
+        for i in range(move_num):
+            temp = stack[src].pop() 
+            move_list.append(temp)
 
+        for el in move_list:
+            stack[dest].append(el)
+    
+    return stack
 
+def print_stack(stack):
+    print('Original:')
+    for el in stack:
+        print(el)
 
+    print('Last Elements:')
+    for el in stack:
+        print(f'{el[-1]}', end='')
+    print('\n')
 
 def main():
     
@@ -78,8 +94,9 @@ def main():
     stack = build_stack(init_state)
     instr_list = read_instr()
 
-    follow_instr(instr_list)
+    stack = follow_instr(instr_list, stack)
 
+    print_stack(stack)
     # for el in stack:
     #     print(el)
     # for single in instr:
