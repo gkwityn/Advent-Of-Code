@@ -16,29 +16,3 @@
 #     - d.ext (file, size=5626152)
 #     - k (file, size=7214296)
 
-class Node:
-   def __init__(self, type):
-      self.left = None
-      self.right = None
-      self.type = type
-      self.size = None
-   def PrintTree(self):
-      print(self.data)
-
-root = Node(10)
-root.PrintTree()
-
-
-from anytree import Node, RenderTree
-
-
-root = Node("root")
-marc = Node("Marc", parent=udo)
-lian = Node("Lian", parent=marc)
-dan = Node("Dan", parent=udo)
-jet = Node("Jet", parent=dan)
-jan = Node("Jan", parent=dan)
-joe = Node("Joe", parent=dan)
-
-for pre, fill, node in RenderTree(udo):
-    print("%s%s" % (pre, node.name))
