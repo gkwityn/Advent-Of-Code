@@ -66,8 +66,20 @@ class Node:
       child.parent = self
       self.childern.append(child)
 
-def build_tree():
-   pass
+def build_tree(lines):
+   for line in lines:
+      line_parse = line.splice().split(' ')
+
+      #check for $
+      if line_parse[0] == '$':
+         #check for cd
+         if line_parse[1] == 'cd'
+            root = Node('root')
+            root.set_type('dir')
+         elif line_parse[2] == ''
+
+
+
 
 def parse_input():
    path = 'test.txt'
@@ -78,6 +90,6 @@ def parse_input():
 
 def main():
    lines = parse_input()
-   build_tree()
+   build_tree(lines)
 
 main()
