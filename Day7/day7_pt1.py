@@ -41,60 +41,65 @@
 #     - k (file, size=7214296)
 
 
-class Node:
-   def __init__(self, name):
-      self.parent = None
-      self.children = []
-      
-      self.name = name
-      self.type = None
-      self.size = 0
-   
-   def set_size(self, size):
-      if self.type == 'file':
-         self.size = size
-      else:
-         raise Exception('Type: "file", only allowed to set_size.') 
-
-   def set_type(self, type):
-      if type == 'file' or type == 'dir':
-         self.type = type
-      else:
-         raise Exception(f'Inproper Node type given: {type}.')
-   
-   def add_child(self, child):
-      child.parent = self
-      self.childern.append(child)
-
-def build_tree(lines):
+def scan(lines):
 
    for line in lines:
-      line_parse = line.splice().split(' ')
+      limit = 100000
+      path_list = []
+      line_parse = line.strip().split(' ')
+      dir_sizes = {}
+      
 
       #check for $ cmds
       if line_parse[0] == '$':
          #check for cd
          if line_parse[1] == 'cd':
-            root = Node('root')
-            root.set_type('dir')
-         #check for ls
-         elif line_parse[1] == 'ls':
-            pass
 
-def  print_tree(root):
-   pass
+            #Root
+            if line_parse[2] == '/':
+               path_list.append(line_parse[2])
+
+            #Prev Dir
+            elif line_parse[2] == '..':
+               path_list.pop()
+
+            #Change Dir.  Add to pathlist
+            else:
+               path_list.append(line_parse[2])
+
+         #check for ls. Can ignore for now.
+         elif line_parse[1] == 'ls':
+            continue
+
+      #Check if its a file
+      elif line_parse[0] != 'dir':
+         size = int(line_parse[0])
+
+         for i in range(len(path_list)):
+            if i <= 1:
+               dir_sizes[path_list[i]] += size
+            else:
+               parent = path_list[i-1]
+               current = path_list[i]
+               dir_key = f'{parent}/{current}'
+               dir_sizes[dir_key] += size
+
+   print(dir_sizes)
+      #Check for dir cmd
+      # elif line_parse[0] == 'dir':
+      #    pass
+
+
 
 def parse_input():
    path = 'test.txt'
-   file = open(path, 'r', encoding= 'UTC-8')
+   file = open(path, 'r', encoding='UTF-8')
    lines = file.readlines()
    return lines
 
 
 def main():
    lines = parse_input()
-
-   root = None
-   build_tree(root, lines)
+   scan(lines)
 
 main()
