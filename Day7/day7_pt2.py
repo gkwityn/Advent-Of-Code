@@ -55,11 +55,29 @@ def parse_input():
    lines = file.readlines()
    return lines
 
+def find_space(dir_sizes):
+    disk_size = 70000000
+    req_space = 30000000
+
+    need_to_free = req_space -(disk_size - dir_sizes['/'])
+    print(f'NeedtoFree: {need_to_free}') 
+
+    list = []
+    for size in dir_sizes.values():
+        if size >= need_to_free:
+            list.append(size)
+    sorted_list = sorted(list)
+    print(sorted_list)
+    ans = sorted_list[0]
+
+    print(f'Pt2: {ans}')
 
 def main():
    lines = parse_input()
    dir_sizes = scan(lines)
    calc_and_print(dir_sizes)
+   find_space(dir_sizes)
+   
 
 main()
 
