@@ -19,20 +19,22 @@ def printForest(forest):
 
 def is_row_visible(row, col, forest):
 
-    full = forest[row]
+    full_row = forest[row]
     key = forest[row][col]
 
+    left, right = True, True
 
-    if col == 0 or col == len(full)-1:
+    if col == 0 or col == len(full_row)-1:
         return True
-    # else:
+    else:
+        return not(left and right)
     #     for i in range(1, len(full)):
     #         if i  == col and visible == False
     #         if full[i] < key :
     #             visible = True
     #         else:
     #             visible = False
-    # return visible
+        
 
 
 def is_col_visible(row, col, forest):
