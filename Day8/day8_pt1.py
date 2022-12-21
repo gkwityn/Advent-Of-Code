@@ -10,55 +10,62 @@ def parse_input():
     
     return forest
 
-def count_visible(forest, row, col):
+def printForest(forest):
+    for i in range( len(forest)):
+            for j in range( len(forest[i])):
+                print(forest[i][j], end='')
+            print()
+    return None
+
+def is_row_visible(row, col, forest):
+
+    full = forest[row]
     key = forest[row][col]
-    visible = False
-    count = 0
-    #Check row visibility 
-    #To the right of n
-    temp = 0
-    for i in range(col, len(forest[row]) ):
-        if forest[row][i] < key:
-            temp += 1
-        else:
-            temp = 0
-    count += temp
-    
-    #To the right of n
-    temp = 0
-    for i in range(row, 0, -1):
-        if forest[i][col] < key:
-            count += 1
-        else:
-            temp = 0
-    count += temp
 
-    #To the top of n
-    temp = 0
-    for i in range(row, len(forest[col])):
-        if forest[i][col] < key:
-            count += 1
-        else:
-            temp = 0
-    count += temp
 
-    return count
-    #To the bottom on n
+    if col == 0 or col == len(full)-1:
+        return True
+    # else:
+    #     for i in range(1, len(full)):
+    #         if i  == col and visible == False
+    #         if full[i] < key :
+    #             visible = True
+    #         else:
+    #             visible = False
+    # return visible
 
-    
-    return count
+
+def is_col_visible(row, col, forest):
+    full = [i[col] for i in forest]
+    key = forest[row][col]
+
+    if row == 0 or row == len(full)-1:
+        return True
+    # else:
+    #     for i in range(1, len(full)):
+    #         if i >= key :
+    #             return False
+    # return True
 
 
 def main():
     forest = parse_input()
-    print(forest)
+    #print(forest)
 
-    row_size = len(forest)
+    count = 0
+    printForest(forest)
+
+    print('-----------------------')
     
-    total = 0
-    for i in range(]):
-        for j in forest:
-            total += count_visible(forest, )
+    for i in range( len(forest)):
+        for j in range( len(forest[i])):
+            if is_row_visible(i, j, forest) or is_col_visible(i, j, forest):
+                print('T', end='')
+                count+=1
+            else:
+                print(' ', end='')
+        print()
 
-    print(f'Total: {total}')
+    print(f'Count: {count}')
+    
 main()
