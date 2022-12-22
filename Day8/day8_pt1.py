@@ -17,61 +17,67 @@ def printForest(forest):
             print()
     return None
 
-def is_row_visible(row, col, forest):
-
-    full_row = forest[row]
-    key = forest[row][col]
-
-    left, right = True, True
-
-    if row == 0 or row == len(forest)-1:
-        return True
-    else:
-        for i in range(0,full_row[col]):
-            if full_row[i] >= key:
-                left = False
-                break
-        
-        #If left is not visible, Test Right side
-        if left == False:
-            for i in range(full_row[col], len(full_row)):
-                if full_row[i] >= key:
-                    right = False
-                    break
-        return left and right
-    
-        
-
-
-def is_col_visible(row, col, forest):
-    
-    #Extract given column from forest
+def extract_col(row, col, forest):
     full_col = []
     for r in range(len(forest[col])):
         for c in range(len(forest[r])):
             if c == row:
                 full_col.append(forest[r][c])
+    return full_col
 
-    #full_col = [i[col] for i in forest]
+def is_row_visible(row, col, forest):
+
+    full_row = forest[row]
     key = forest[row][col]
-    up, down = True, True
-
-    if row == 0 or row == len(forest)-1 or col == 0 or col == len(forest[0])-1:
+    
+    #Check if item is on the perimiter
+    if is_perimeter(row, col, forest):
         return True
     else:
-        for i in range(0,full_col[row]):
-            if full_col[i] >= key:
-                up = False
-                break
-        
-        #If up is not visible, Test below key
-        if up == False:
-            for i in range(full_col[row], len(full_col)):
-                if full_col[i] >= key:
-                    down = False
-                    break
-        return up and down
+        for i in range(0, len(full_row)):
+            if i == col:
+                continue
+            else:
+                if full_row[i] >= key:
+                    return False
 
+
+def is_col_visible(row, col, forest):
+    
+    #Extract given column from forest
+    full_col = extract_col(row, col, forest)
+
+    key = forest[row][col]
+
+    if is_perimeter(row, col, forest):
+        return True
+    else:
+        for i in range(0, len(full_col)):
+            if i == row:
+                continue
+            else:
+                if full_col[i] >= key:
+                    return False    
+
+
+def is_perimeter(row, col, forest):
+    #First Row
+    if row == 0 and col >= 0:
+        return True
+    #Last Row
+    elif row == len(forest)-1 and col >= 0:
+        return True
+    #First Col
+    elif row >= 0 and col ==0:
+        return True
+    #Last Col
+    elif row >= 0 and col == len(forest[0])-1:
+        return True
+    
+    return False
+    
+
+        
 
 def main():
     forest = parse_input()
@@ -84,7 +90,9 @@ def main():
     
     for i in range( len(forest)):
         for j in range( len(forest[i])):
-            if is_row_visible(i, j, forest) or is_col_visible(i, j, forest):
+            #if is_row_visible(i, j, forest):
+            #if is_col_visible(i, j, forest):
+            if is_row_visible(i, j, forest) and is_col_visible(i, j, forest):
                 print('T', end='')
                 count+=1
             else:
