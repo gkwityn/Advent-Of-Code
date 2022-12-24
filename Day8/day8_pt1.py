@@ -1,5 +1,6 @@
 def parse_input():
     path = 'test.txt'
+    #path = 'data.txt'
     file = open(path, 'r', encoding='UTF-8')
     lines = file.readlines()
     
@@ -29,17 +30,29 @@ def is_row_visible(row, col, forest):
 
     full_row = forest[row]
     key = forest[row][col]
+
+    left, right = False, False
     
     #Check if item is on the perimiter
     if is_perimeter(row, col, forest):
         return True
     else:
         for i in range(0, len(full_row)):
+            if i < col:
+                if full_row[i] < key:
+                    left = True
+                else:
+                    left = False
+                    i = col+1
             if i == col:
                 continue
-            else:
-                if full_row[i] >= key:
-                    return False
+            if i > col:
+                if full_row[i] < key:
+                    right = True
+                else:
+                    right = False
+                    break
+    return left or right
 
 
 def is_col_visible(row, col, forest):
@@ -48,17 +61,27 @@ def is_col_visible(row, col, forest):
     full_col = extract_col(row, col, forest)
 
     key = forest[row][col]
+    up, down = False, False
 
     if is_perimeter(row, col, forest):
         return True
     else:
         for i in range(0, len(full_col)):
+            if i < row:
+                if full_col[i] < key:
+                    up = True
+                else:
+                    up = False
+                    i = row+1
             if i == row:
                 continue
-            else:
-                if full_col[i] >= key:
-                    return False    
-
+            if i > row:
+                if full_col[i] < key:
+                    down = True  
+                else:
+                    down = False 
+                    break
+    return up or down
 
 def is_perimeter(row, col, forest):
     #First Row
@@ -92,7 +115,7 @@ def main():
         for j in range( len(forest[i])):
             #if is_row_visible(i, j, forest):
             #if is_col_visible(i, j, forest):
-            if is_row_visible(i, j, forest) and is_col_visible(i, j, forest):
+            if is_row_visible(i, j, forest) or is_col_visible(i, j, forest):
                 print('T', end='')
                 count+=1
             else:
