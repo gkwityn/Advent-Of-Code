@@ -17,6 +17,17 @@ def printForest(forest):
             print()
     return None
 
+
+def is_left_visible():
+    pass
+
+def get_row(row, forest):
+    return forest[row]
+
+def get_col():
+    pass
+
+
 def is_row_visible(row, col, forest):
 
     full_row = forest[row]
