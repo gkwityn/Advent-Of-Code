@@ -22,7 +22,8 @@ def printForest(forest):
 def is_left_visible():
     pass
 
-def get_row(row, forest):
+def get_row(row, col, 
+forest):
     return forest[row]
 
 def get_col(row, col, forest):
