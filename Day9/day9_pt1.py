@@ -18,11 +18,12 @@ def parse_input(path):
        
         return instructions
 
+
 def get_grid_size(lines):
     x_max = 0
     y_max = 0
-    x_pos = 0
-    y_pos = 0
+    head_x_pos = 0
+    head_y_pos = 0
 
     for line in lines:
         l = line.split()
@@ -31,63 +32,84 @@ def get_grid_size(lines):
 
 
         if dir == 'R':
-            x_pos += move
-            if x_pos > x_max:
-                x_max = x_pos
+            head_x_pos += move
+            if head_x_pos > x_max:
+                x_max = head_x_pos
 
         elif dir == 'L':
-            x_pos -= move
+            head_x_pos -= move
 
         elif dir == 'U':
-            y_pos += move
-            if y_pos > y_max:
-                y_max = y_pos
+            head_y_pos += move
+            if head_y_pos > y_max:
+                y_max = head_y_pos
 
         elif dir == 'D':
-            y_pos -= move
+            head_y_pos -= move
 
     print(f'Grid Size: [{x_max}, {y_max}]')
 
     return [x_max+1, y_max+1]
 
 
-
-def print_state(x_pos, y_pos):
+def print_state(head_x_pos, head_y_pos):
     
     for y in range(grid_size[0], -1, -1):
         print('')
         for x in range(grid_size[1]):
-            if x == x_pos and y == y_pos:
+            if x == head_x_pos and y == head_y_pos:
                 print('H', end='')
             else:
                 print('.', end='')
     print()
+    return
 
 
 def moves(lines):
-    x_pos = 0
-    y_pos = 0
-    print_state(x_pos, y_pos)
+    head_x_pos, head_y_pos = 0,0
+    tail_x_pos, tail_y_pos = 0,0
+    print_state(head_x_pos, head_y_pos)
+
+    visited = []
+    visited.append([tail_x_pos, tail_y_pos])
 
     for line in lines:
-        
-        
+
         l = line.split()
         dir = l[0]
         move = int(l[1])
 
         if dir == 'R':
-            x_pos += move
+            for step in range(move):
+                head_x_pos += 1
+                print_state(head_x_pos, head_y_pos)
 
         elif dir == 'L':
-            x_pos -= move
+            for step in range(move):
+                head_x_pos -= 1
+                print_state(head_x_pos, head_y_pos)
 
         elif dir == 'U':
-            y_pos += move
+            for step in range(move):
+                head_y_pos += 1
+                print_state(head_x_pos, head_y_pos)
 
         elif dir == 'D':
-            y_pos -= move
-        print_state(x_pos, y_pos)
+            for step in range(move):
+                head_y_pos -= 1
+                print_state(head_x_pos, head_y_pos)
+
+    return visited
+
+
+def update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
+
+    #head and tail at same position
+    if head_x_pos == tail_x_pos and head_y_pos == tail_y_pos:
+        return  tail_x_pos, tail_y_pos
+    #Same row
+    elif 
+
 
 def main():
     assert (len(sys.argv) == 2), 'Invalid CL Argument'
@@ -99,7 +121,7 @@ def main():
     global grid_size
     grid_size = get_grid_size(instr)
 
-    moves(instr)
+    visited = moves(instr)
     
 
 if __name__ == '__main__':
