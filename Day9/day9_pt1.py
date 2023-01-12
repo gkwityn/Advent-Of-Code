@@ -22,8 +22,8 @@ def parse_input(path):
 def get_grid_size(lines):
     x_max = 0
     y_max = 0
-    head_x_pos = 0
-    head_y_pos = 0
+    head_x_pos = 1
+    head_y_pos = 1
 
     for line in lines:
         l = line.split()
@@ -51,12 +51,12 @@ def get_grid_size(lines):
 
     return [x_max, y_max]
 
-#TODO: DEBUG GRID SIZE
+
 def print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     
     for y in range(grid_size[0], 0, -1):
         print('')
-        for x in range(grid_size[1]):
+        for x in range(1, grid_size[1]+2):
            
             #Head Location
             if x == head_x_pos and y == head_y_pos:
@@ -72,8 +72,8 @@ def print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
 
 
 def moves(lines):
-    head_x_pos, head_y_pos = 0,0
-    tail_x_pos, tail_y_pos = 0,0
+    head_x_pos, head_y_pos = 1,1
+    tail_x_pos, tail_y_pos = 1,1
     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
     visited = []
@@ -211,6 +211,7 @@ def update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
         elif  head_x_pos == (tail_x_pos + 2) and head_y_pos == (tail_y_pos + 1): 
             return tail_x_pos + 1, tail_y_pos +1
 
+        #TODO: Check accuracy of tail move functions
         #Right2
         #if right +2 and up +1
         # .....    .....
