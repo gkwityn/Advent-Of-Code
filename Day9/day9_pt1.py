@@ -24,12 +24,14 @@ def get_grid_size(lines):
     y_max = 0
     head_x_pos = 1
     head_y_pos = 1
-
+    
+    
     for line in lines:
         l = line.split()
         dir = l[0]
         move = int(l[1])
 
+        
 
         if dir == 'R':
             head_x_pos += move
@@ -84,6 +86,8 @@ def moves(lines):
         l = line.split()
         dir = l[0]
         move = int(l[1])
+
+        print(f'\n== {dir} {move} ==')
 
         if dir == 'R':
             for step in range(move):
