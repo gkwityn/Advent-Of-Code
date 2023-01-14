@@ -132,6 +132,9 @@ def moves(lines):
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+        
+        if[tail_x_pos, tail_y_pos] not in visited:
+            visited.append([tail_x_pos, tail_y_pos])
 
     return visited
 
@@ -281,6 +284,8 @@ def main():
     grid_size = get_grid_size(instr)
 
     visited = moves(instr)
+
+    print(visited)
     
 
 if __name__ == '__main__':
