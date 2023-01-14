@@ -73,6 +73,21 @@ def print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     return
 
 
+#TODO fix this
+def print_tail(visited):
+    
+    for y in range(grid_size[0], 0, -1):
+        print('')
+        for x in range(1, grid_size[1]+2):
+            
+            if x == tail_x_pos and y == tail_y_pos:
+                print('T', end='')
+            #Empty Location
+            else:
+                print('.', end='')
+    print()
+    return
+
 def moves(lines):
     head_x_pos, head_y_pos = 1,1
     tail_x_pos, tail_y_pos = 1,1
@@ -133,8 +148,8 @@ def moves(lines):
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
         
-        if[tail_x_pos, tail_y_pos] not in visited:
-            visited.append([tail_x_pos, tail_y_pos])
+    
+        visited.append([tail_x_pos, tail_y_pos])
 
     return visited
 
@@ -146,7 +161,6 @@ def check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     if ((head_x_pos == tail_x_pos + 1) and (head_y_pos == tail_y_pos)) or ((head_x_pos == tail_x_pos - 1) and (head_y_pos == tail_y_pos)):
         return True
     #Check if directly up or down
-    #TODO BUG HERE
     elif ((head_y_pos == tail_y_pos +1) and (head_x_pos ==  tail_x_pos)) or ((head_y_pos == tail_y_pos -1) and (head_x_pos ==  tail_x_pos)):
         return True
     #check Diagonal left up or right up
@@ -219,7 +233,6 @@ def update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
         elif  head_x_pos == (tail_x_pos + 2) and head_y_pos == (tail_y_pos + 1): 
             return tail_x_pos + 1, tail_y_pos +1
 
-        #TODO: Check accuracy of tail move functions
         #Right2
         #if right +2 and up +1
         # .....    .....
@@ -285,7 +298,11 @@ def main():
 
     visited = moves(instr)
 
+
+
     print(visited)
+    print_tail(visited)
+    print(f'Tail visited:{len(visited)}')
     
 
 if __name__ == '__main__':
