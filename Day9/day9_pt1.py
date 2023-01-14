@@ -143,7 +143,8 @@ def check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     if ((head_x_pos == tail_x_pos + 1) and (head_y_pos == tail_y_pos)) or ((head_x_pos == tail_x_pos - 1) and (head_y_pos == tail_y_pos)):
         return True
     #Check if directly up or down
-    elif ((head_y_pos == tail_y_pos +1) and (head_x_pos ==  tail_y_pos)) or ((head_y_pos == tail_y_pos -1) and (head_x_pos ==  tail_y_pos)):
+    #TODO BUG HERE
+    elif ((head_y_pos == tail_y_pos +1) and (head_x_pos ==  tail_x_pos)) or ((head_y_pos == tail_y_pos -1) and (head_x_pos ==  tail_x_pos)):
         return True
     #check Diagonal left up or right up
     elif ((head_x_pos == tail_x_pos - 1) and (head_y_pos == tail_y_pos + 1)) or ((head_x_pos == tail_x_pos + 1) and (head_y_pos == tail_y_pos + 1)):
