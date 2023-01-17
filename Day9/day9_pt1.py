@@ -73,18 +73,16 @@ def print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     return
 
 
-#TODO fix this
+
 def print_tail(visited):
     
-    # for pos in visited:
-    #             tail_x_pos, tail_y_pos = pos[0], pos[1]
     list = []
 
     for y in range(grid_size[0], 0, -1):
         print('')
         for x in range(1, grid_size[1]+2):          
             if [x,y] in visited:
-                print('T', end='')
+                print('#', end='')
                 
             #Empty Location
             else:
@@ -99,6 +97,7 @@ def moves(lines):
     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
     visited = []
+    
     visited.append([tail_x_pos, tail_y_pos])
 
     for line in lines:
@@ -153,8 +152,8 @@ def moves(lines):
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
         
-    
-        visited.append([tail_x_pos, tail_y_pos])
+        if [tail_x_pos, tail_y_pos] not in visited:
+            visited.append([tail_x_pos, tail_y_pos])
 
     return visited
 
