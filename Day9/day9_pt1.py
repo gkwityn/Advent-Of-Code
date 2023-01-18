@@ -56,7 +56,7 @@ def get_grid_size(lines):
 
 def print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     
-    for y in range(grid_size[0], 0, -1):
+    for y in range(grid_size[0]-1, 0, -1):
         print('')
         for x in range(1, grid_size[1]+2):
            
@@ -78,7 +78,7 @@ def print_tail(visited):
     
     list = []
 
-    for y in range(grid_size[0], 0, -1):
+    for y in range(grid_size[0]-1, 0, -1):
         print('')
         for x in range(1, grid_size[1]+2):          
             if [x,y] in visited:
@@ -94,7 +94,7 @@ def print_tail(visited):
 def moves(lines):
     head_x_pos, head_y_pos = 1,1
     tail_x_pos, tail_y_pos = 1,1
-    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
     visited = []
     
@@ -110,51 +110,76 @@ def moves(lines):
 
         if dir == 'R':
             for step in range(move):
+                #move head 1 position right
                 head_x_pos += 1
-                print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-
+                
+                #if tail is adjecent by one postition
+                #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
-                    continue
+                    pass
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                
+                if [tail_x_pos, tail_y_pos] not in visited:
+                    visited.append([tail_x_pos, tail_y_pos])
 
         elif dir == 'L':
             for step in range(move):
+                #move head 1 position left
                 head_x_pos -= 1
-                print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
+                #if tail is adjecent by one postition
+                #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
-                    continue
+                    pass
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                
+                if [tail_x_pos, tail_y_pos] not in visited:
+                    visited.append([tail_x_pos, tail_y_pos])
+                
         elif dir == 'U':
             for step in range(move):
+                #move head 1 postion up
                 head_y_pos += 1
-                print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-
+                
+                #if tail is adjecent by one postition
+                #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
-                    continue
+                    pass
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+
+                if [tail_x_pos, tail_y_pos] not in visited:
+                    visited.append([tail_x_pos, tail_y_pos])
 
         elif dir == 'D':
             for step in range(move):
+                #move head 1 position down
                 head_y_pos -= 1
-                print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
+                #if tail is adjecent by one postition
+                #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
-                    continue
+                    pass
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-        
-        if [tail_x_pos, tail_y_pos] not in visited:
-            visited.append([tail_x_pos, tail_y_pos])
+                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
+                if [tail_x_pos, tail_y_pos] not in visited:
+                    visited.append([tail_x_pos, tail_y_pos])
+        
     return visited
 
 def check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
@@ -171,6 +196,8 @@ def check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     elif ((head_x_pos == tail_x_pos - 1) and (head_y_pos == tail_y_pos + 1)) or ((head_x_pos == tail_x_pos + 1) and (head_y_pos == tail_y_pos + 1)):
         return True
     #check Diagonal left down or right down
+    
+    #TODO check for accuracy
     elif ((head_x_pos == tail_x_pos - 1) and (head_y_pos == tail_y_pos - 1)) or ((head_x_pos == tail_x_pos + 1) and (head_y_pos == tail_y_pos - 1)):
         return True
 
@@ -284,7 +311,7 @@ def update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
         # ..... -> ..T..
         # ..H..    ..H..
         # .....    .....
-        elif head_x_pos == (tail_x_pos + 1) and head_y_pos == (tail_y_pos - 2): 
+        elif head_x_pos == (tail_x_pos - 1) and head_y_pos == (tail_y_pos - 2): 
             return tail_x_pos -1, tail_y_pos -1
 
         return 99, 99
