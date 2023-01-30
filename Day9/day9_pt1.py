@@ -343,7 +343,7 @@ def main():
 
 
 
-    print(visited)
+    print(f'Visted: {visited}')
     print_tail(visited)
     print(f'Tail visited:{len(visited)}')
     
