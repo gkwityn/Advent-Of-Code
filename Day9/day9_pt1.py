@@ -117,13 +117,16 @@ def moves(lines):
                 #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
                     pass
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 
-                if [tail_x_pos, tail_y_pos] not in visited:
+                if len(visited) < 10:
+                    visited.append([tail_x_pos, tail_y_pos])
+                else:
+                    visited.pop(9)
                     visited.append([tail_x_pos, tail_y_pos])
 
         elif dir == 'L':
@@ -135,13 +138,16 @@ def moves(lines):
                 #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
                     pass
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 
-                if [tail_x_pos, tail_y_pos] not in visited:
+                if len(visited) < 10:
+                    visited.append([tail_x_pos, tail_y_pos])
+                else:
+                    visited.pop(9)
                     visited.append([tail_x_pos, tail_y_pos])
                 
         elif dir == 'U':
@@ -153,13 +159,16 @@ def moves(lines):
                 #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
                     pass
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
-                if [tail_x_pos, tail_y_pos] not in visited:
+                if len(visited) < 10:
+                    visited.append([tail_x_pos, tail_y_pos])
+                else:
+                    visited.pop(9)
                     visited.append([tail_x_pos, tail_y_pos])
 
         elif dir == 'D':
@@ -171,13 +180,16 @@ def moves(lines):
                 #dont move tail
                 if check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
                     pass
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 #move and update tail position
                 else:
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
-                    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
+                    print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
-                if [tail_x_pos, tail_y_pos] not in visited:
+                if len(visited) < 10:
+                    visited.append([tail_x_pos, tail_y_pos])
+                else:
+                    visited.pop(9)
                     visited.append([tail_x_pos, tail_y_pos])
         
     return visited
