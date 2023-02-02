@@ -53,9 +53,11 @@ def get_grid_size(lines):
 
     return [x_max, y_max]
 
-
-def print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
+#TODO FIX THIS
+def print_state(rope):
     
+
+
     for y in range(grid_size[0]-1, 0, -1):
         print('')
         for x in range(1, grid_size[1]+2):
@@ -72,33 +74,19 @@ def print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     print()
     return
 
+def init_rope():
+    #Initialization of Rope on Grid
+    rope = []
+    for i in range(10):
+        rope.append([1, 1])
+    return rope
 
-
-def print_tail(visited):
-    
-    list = []
-
-    for y in range(grid_size[0]-1, 0, -1):
-        print('')
-        for x in range(1, grid_size[1]+2):          
-            if [x,y] in visited:
-                print('#', end='')
-                
-            #Empty Location
-            else:
-                print('.', end='')
-    print('\n')
-
-    return
 
 def moves(lines):
-    head_x_pos, head_y_pos = 1,1
-    tail_x_pos, tail_y_pos = 1,1
-    #print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
-    visited = []
-    
-    visited.append([tail_x_pos, tail_y_pos])
+    rope = init_rope()
+    print_state(rope)
+
 
     for line in lines:
 
@@ -123,11 +111,11 @@ def moves(lines):
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 
-                if len(visited) < 10:
-                    visited.append([tail_x_pos, tail_y_pos])
+                if len(rope) < 10:
+                    rope.append([tail_x_pos, tail_y_pos])
                 else:
-                    visited.pop(9)
-                    visited.append([tail_x_pos, tail_y_pos])
+                    rope.pop(9)
+                    rope.append([tail_x_pos, tail_y_pos])
 
         elif dir == 'L':
             for step in range(move):
@@ -144,11 +132,11 @@ def moves(lines):
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                 
-                if len(visited) < 10:
-                    visited.append([tail_x_pos, tail_y_pos])
+                if len(rope) < 10:
+                    rope.append([tail_x_pos, tail_y_pos])
                 else:
-                    visited.pop(9)
-                    visited.append([tail_x_pos, tail_y_pos])
+                    rope.pop(9)
+                    rope.append([tail_x_pos, tail_y_pos])
                 
         elif dir == 'U':
             for step in range(move):
@@ -165,11 +153,11 @@ def moves(lines):
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
-                if len(visited) < 10:
-                    visited.append([tail_x_pos, tail_y_pos])
+                if len(rope) < 10:
+                    rope.append([tail_x_pos, tail_y_pos])
                 else:
-                    visited.pop(9)
-                    visited.append([tail_x_pos, tail_y_pos])
+                    rope.pop(9)
+                    rope.append([tail_x_pos, tail_y_pos])
 
         elif dir == 'D':
             for step in range(move):
@@ -186,13 +174,13 @@ def moves(lines):
                     tail_x_pos, tail_y_pos = update_tail(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
                     print_state(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos)
 
-                if len(visited) < 10:
-                    visited.append([tail_x_pos, tail_y_pos])
+                if len(rope) < 10:
+                    rope.append([tail_x_pos, tail_y_pos])
                 else:
-                    visited.pop(9)
-                    visited.append([tail_x_pos, tail_y_pos])
+                    rope.pop(9)
+                    rope.append([tail_x_pos, tail_y_pos])
         
-    return visited
+    return rope
 
 def check_adjacent(head_x_pos, head_y_pos, tail_x_pos, tail_y_pos):
     if head_x_pos == tail_x_pos and head_y_pos == tail_y_pos:
@@ -339,13 +327,13 @@ def main():
     global grid_size
     grid_size = get_grid_size(instr)
 
-    visited = moves(instr)
+    rope = moves(instr)
 
 
 
-    print(f'Visted: {visited}')
-    print_tail(visited)
-    print(f'Tail visited:{len(visited)}')
+    print(f'Visted: {rope}')
+    print_tail(rope)
+    print(f'Tail rope:{len(rope)}')
     
 
 if __name__ == '__main__':
