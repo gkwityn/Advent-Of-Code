@@ -61,16 +61,16 @@ def print_state(rope):
     for y in range(grid_size[0]-1, 0, -1):
         print('')
         for x in range(1, grid_size[1]+2):
-           
-            #Head Location
-            if x == head_x_pos and y == head_y_pos:
-                print('H', end='')
-            #Tail Location
-            elif x == tail_x_pos and y == tail_y_pos:
-                print('T', end='')
-            #Empty Location
-            else:
-                print('.', end='')
+            for i, knot in enumerate(rope):
+                #Head Location
+                if x == knot[0] and y == knot[1] and i == 0:
+                    print('H', end='')
+                #Print knot index Location
+                elif x == knot[0] and y == knot[1]:
+                    print(f'{i}', end='')
+                #Empty Location
+                else:
+                    print('.', end='')
     print()
     return
 
