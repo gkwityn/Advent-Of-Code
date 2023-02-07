@@ -56,15 +56,24 @@ def get_grid_size(lines):
 #TODO FIX THIS
 def print_state(rope):
     
-
+    dup =[]
+    for item in rope:
+        if item not in dup:
+            dup.append(item)
+        else:
+            dup.append([-1, -1])
+    rope = dup
 
     for y in range(grid_size[0]-1, 0, -1):
         print('')
         for x in range(1, grid_size[1]+2):
             for i, knot in enumerate(rope):
                 #Head Location
-                if x == knot[0] and y == knot[1] and i == 0:
+                if x == knot[0] and y == knot[1] and i == 9:
                     print('H', end='')
+                #Tail Location
+                elif  x == knot[0] and y == knot[1] and i == 0:
+                    print('T', end='')
                 #Print knot index Location
                 elif x == knot[0] and y == knot[1]:
                     print(f'{i}', end='')
