@@ -53,6 +53,7 @@ def get_grid_size(lines):
 
     return [x_max, y_max]
 
+
 #TODO FIX THIS
 def print_state(rope):
     
@@ -71,15 +72,19 @@ def print_state(rope):
                 #Head Location
                 if x == knot[0] and y == knot[1] and i == 9:
                     print('H', end='')
+                    
                 #Tail Location
                 elif  x == knot[0] and y == knot[1] and i == 0:
                     print('T', end='')
+                    
                 #Print knot index Location
                 elif x == knot[0] and y == knot[1]:
                     print(f'{i}', end='')
+                    
                 #Empty Location
                 else:
                     print('.', end='')
+                break
     print()
     return
 
@@ -341,7 +346,7 @@ def main():
 
 
     print(f'Visted: {rope}')
-    print_tail(rope)
+    
     print(f'Tail rope:{len(rope)}')
     
 
