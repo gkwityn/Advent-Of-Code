@@ -72,7 +72,7 @@ def print_state(rope):
                 #Head Location
                 if x == knot[0] and y == knot[1] and i == 9:
                     print('H', end='')
-                    
+
                 #Tail Location
                 elif  x == knot[0] and y == knot[1] and i == 0:
                     print('T', end='')
@@ -95,7 +95,7 @@ def init_rope():
         rope.append([1, 1])
     return rope
 
-
+#TODO fix method call parameters, push ontop rope stack?
 def moves(lines):
 
     rope = init_rope()
