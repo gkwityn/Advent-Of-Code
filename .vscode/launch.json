@@ -16,7 +16,7 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "cwd": "${fileDirname}",
-            "args": ["test.txt"]
+            "args": ["test_large.txt"]
         }
     ]
 }
