@@ -1,3 +1,9 @@
+class monkey():
+    def __init__(self):
+        pass
+
+
+
 def parse_input():
     with open("test.txt","r") as f:
         lines = f.readlines()
