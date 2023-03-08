@@ -2,15 +2,11 @@ class CPU():
     def __init__(self, clock, registerX):
         self.clock = clock
         self.registerX = registerX
-        self.signal_list = []
 
     def tick(self):
         
         self.render()
         self.clock += 1
-        
-        if self.clock == 20 or (self.clock + 20)% 40  == 0:
-            self.signal_list.append(self.clock*self.registerX)
 
     def opp(self, op, val ):
         if op == "addx":
