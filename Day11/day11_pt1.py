@@ -7,7 +7,17 @@ class monkey():
         self.if_true_throw_to = if_true_throw_to
         self.if_false_throw_to = if_false_throw_to
 
-#TODO Fix obj parsings
+    def __str__(self):
+        print(f'monkey_number: {self.monkey_number}')
+        print(f'items: {self.items}', end='\n')
+        print(f'opperator: {self.opperation[0]}, opperand: {self.opperation[1]}', end='') #[0] = operator, [1] = opperand
+        print(f'Divisible_by: {self.divisible_by}', end='\n') 
+        print(f'if_true_throw_to: {self.if_true_throw_to}')
+        print(f'if_false_throw_to: {self.if_false_throw_to}', end='\n')
+        return ""
+    
+
+#TODO Fix not parsing last monkey
 def parse_input():
 
     monkeys = []
@@ -16,12 +26,12 @@ def parse_input():
         lines = f.readlines()
 
     for line_num, line in enumerate(lines, 0):
-        monkey_number = None
-        items = None #list of starting items
-        opperation = None #[0] = operator, [1] = opperand
-        divisible_by = None 
-        if_true_throw_to = None
-        if_false_throw_to = None
+        # monkey_number = None
+        # items = None #list of starting items
+        # opperation = None #[0] = operator, [1] = opperand
+        # divisible_by = None 
+        # if_true_throw_to = None
+        # if_false_throw_to = None
 
         if line_num == 0 or (line_num % 7) == 0:
             monkey_number = line.split()[1]
@@ -50,15 +60,18 @@ def parse_input():
             if_false_throw_to = int(line.split()[5])
             #print(f'if_false_throw_to: {if_false_throw_to}')
 
-        elif line == '\n':
-            pass
-            #print()
-        monkey(monkey_number, items, opperation, divisible_by, if_true_throw_to, if_false_throw_to)
-        monkeys.append(monkey)
+        else: #(line_num == 6 ) or (line_num % 7) == 6:
+            my_monkey = monkey(monkey_number, items, opperation, divisible_by, if_true_throw_to, if_false_throw_to)
+            monkeys.append(my_monkey)
+        
+        
+        
     return monkeys
 
 
 if __name__ == "__main__":
     monkeys = parse_input()
-    print((monkeys))
+    
+    for obj in monkeys:
+        print(obj.__str__())
     
