@@ -17,7 +17,7 @@ class monkey():
         return ""
     
 
-#TODO Fix not parsing last monkey
+
 def parse_input():
 
     monkeys = []
@@ -26,12 +26,7 @@ def parse_input():
         lines = f.readlines()
 
     for line_num, line in enumerate(lines, 0):
-        # monkey_number = None
-        # items = None #list of starting items
-        # opperation = None #[0] = operator, [1] = opperand
-        # divisible_by = None 
-        # if_true_throw_to = None
-        # if_false_throw_to = None
+        
 
         if line_num == 0 or (line_num % 7) == 0:
             monkey_number = line.split()[1]
@@ -60,12 +55,11 @@ def parse_input():
             if_false_throw_to = int(line.split()[5])
             #print(f'if_false_throw_to: {if_false_throw_to}')
 
-        else: #(line_num == 6 ) or (line_num % 7) == 6:
+        elif (line_num == 6 ) or (line_num % 7) == 6:
             my_monkey = monkey(monkey_number, items, opperation, divisible_by, if_true_throw_to, if_false_throw_to)
             monkeys.append(my_monkey)
         
-        
-        
+
     return monkeys
 
 
