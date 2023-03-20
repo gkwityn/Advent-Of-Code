@@ -62,10 +62,25 @@ def parse_input():
 
     return monkeys
 
+def monkey_in_the_middle(monkeys):
+    #psuedocode:
+    
+    #start round
+        #each monkey looks at each item they are holding one at a time
+        #perform opperation on that item to get new worry level
+        #divide new worry level by Divisible_by
+            #check new worry level against each condition true/false
+            #throw item to new monkey
+        
+
+
+
 
 if __name__ == "__main__":
     monkeys = parse_input()
     
     for obj in monkeys:
         print(obj.__str__())
+
+    
     
