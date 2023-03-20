@@ -71,6 +71,8 @@ def monkey_in_the_middle(monkeys):
         #divide new worry level by Divisible_by
             #check new worry level against each condition true/false
             #throw item to new monkey
+
+            #?? find concluding case
         
 
 
