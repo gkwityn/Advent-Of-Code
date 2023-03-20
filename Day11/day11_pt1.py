@@ -63,6 +63,7 @@ def parse_input():
     return monkeys
 
 def monkey_in_the_middle(monkeys):
+    pass
     #psuedocode:
     
     #start round
