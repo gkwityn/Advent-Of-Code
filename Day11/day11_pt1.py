@@ -62,11 +62,39 @@ def parse_input():
 
     return monkeys
 
+def inspect_items(monkey):
+    for item in monkey.items:
+        print(f'\tMonkey inspects an item with a worry level of {item}')
+
 def monkey_in_the_middle(monkeys):
-    pass
     #psuedocode:
     
-    #start round
+    #Run for 20 Rounds
+    for round in range(1,21):
+        print(f'Round: {round} Start:\n')
+        
+        #For each round go one monkey at a time.
+        for monkey in monkeys:
+            print(f'Monkey_number: {monkey.monkey_number}')
+            worry_level = monkey.monkey_number
+
+            if monkey.opperation[0] == '+':
+                worry_level += monkey.opperation[1]
+                print(f'Worry level is increased by {monkey.opperation[1]} to {}')
+            elif monkey.opperation[0] == '*':
+                print(f'Worry level is multiplied by {monkey.opperation[1]} to {}')
+
+            inspect_items(monkey)
+            
+
+        
+        print("\n****************************")
+
+
+
+
+
+    
         #each monkey looks at each item they are holding one at a time
         #perform opperation on that item to get new worry level
         #divide new worry level by Divisible_by
@@ -84,6 +112,8 @@ if __name__ == "__main__":
     
     for obj in monkeys:
         print(obj.__str__())
+
+    monkey_in_the_middle(monkeys)
 
     
     
