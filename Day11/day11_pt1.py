@@ -1,26 +1,8 @@
-class monkey():
-    def __init__(self, monkey_number, items, opperation, divisible_by, if_true_throw_to, if_false_throw_to):
-        self.monkey_number = monkey_number
-        self.items = items #list of starting items
-        self.opperation = opperation #[0] = operator, [1] = opperand
-        self.divisible_by = divisible_by 
-        self.if_true_throw_to = if_true_throw_to
-        self.if_false_throw_to = if_false_throw_to
-
-    def __str__(self):
-        print(f'monkey_number: {self.monkey_number}')
-        print(f'items: {self.items}', end='\n')
-        print(f'opperator: {self.opperation[0]}, opperand: {self.opperation[1]}', end='') #[0] = operator, [1] = opperand
-        print(f'Divisible_by: {self.divisible_by}', end='\n') 
-        print(f'if_true_throw_to: {self.if_true_throw_to}')
-        print(f'if_false_throw_to: {self.if_false_throw_to}', end='\n')
-        return ""
-    
-
+from Monkey import *
 
 def parse_input():
 
-    monkeys = []
+    Monkeys = []
 
     with open("test.txt","r") as f:
         lines = f.readlines()
@@ -56,64 +38,63 @@ def parse_input():
             #print(f'if_false_throw_to: {if_false_throw_to}')
 
         elif (line_num == 6 ) or (line_num % 7) == 6:
-            my_monkey = monkey(monkey_number, items, opperation, divisible_by, if_true_throw_to, if_false_throw_to)
-            monkeys.append(my_monkey)
+            my_Monkey = Monkey(monkey_number, items, opperation, divisible_by, if_true_throw_to, if_false_throw_to)
+            Monkeys.append(my_Monkey)
         
 
-    return monkeys
+    return Monkeys
 
 def inspect_items(monkey):
-    for item in monkey.items:
+    
+    for item, index in enumerate(monkey.items):
+        
+        #update worrylevel
         print(f'\tMonkey inspects an item with a worry level of {item}')
+        worry_level = None
+        if monkey.opperation[1] == "old\n":
+            monkey.opperation[1] = item
+        
+        
+        if monkey.opperation[0] == '+':
+            worry_level = item + int(monkey.opperation[1])
+            print(f'Worry level is increased by {monkey.opperation[1]} to {worry_level}')
+        elif monkey.opperation[0] == '*':
+            worry_level = item * int(monkey.opperation[1])
+            print(f'Worry level is multiplied by {monkey.opperation[1]} to {worry_level}')
+        
+        removeListIndex = []
+     
+    #TODO Write the test function
 
-def monkey_in_the_middle(monkeys):
-    #psuedocode:
+
+    #If thrown remove thrown items from this monkeys item list
+    for index in removeListIndex:
+        monkey.items.pop(index)   
+
+
+def Monkey_in_the_middle(Monkeys):
     
     #Run for 20 Rounds
     for round in range(1,21):
         print(f'Round: {round} Start:\n')
         
-        #For each round go one monkey at a time.
-        for monkey in monkeys:
-            print(f'Monkey_number: {monkey.monkey_number}')
-            worry_level = monkey.monkey_number
-
-            if monkey.opperation[0] == '+':
-                worry_level += monkey.opperation[1]
-                print(f'Worry level is increased by {monkey.opperation[1]} to {}')
-            elif monkey.opperation[0] == '*':
-                print(f'Worry level is multiplied by {monkey.opperation[1]} to {}')
+        #For each round go one Monkey at a time.
+        for monkey in Monkeys:
+            print(f'monkey_number: {monkey.monkey_number}')
 
             inspect_items(monkey)
-            
 
-        
         print("\n****************************")
 
 
 
-
-
-    
-        #each monkey looks at each item they are holding one at a time
-        #perform opperation on that item to get new worry level
-        #divide new worry level by Divisible_by
-            #check new worry level against each condition true/false
-            #throw item to new monkey
-
-            #?? find concluding case
-        
-
-
-
-
 if __name__ == "__main__":
-    monkeys = parse_input()
+    Monkeys = parse_input()
     
-    for obj in monkeys:
+    for obj in Monkeys:
         print(obj.__str__())
 
-    monkey_in_the_middle(monkeys)
+    Monkey_in_the_middle(Monkeys)
 
     
     
