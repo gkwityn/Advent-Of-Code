@@ -44,6 +44,7 @@ def parse_input():
 
     return Monkeys
 
+
 def inspect_items(monkey):
     
     for item, index in enumerate(monkey.items):
@@ -85,7 +86,6 @@ def Monkey_in_the_middle(Monkeys):
             inspect_items(monkey)
 
         print("\n****************************")
-
 
 
 if __name__ == "__main__":
