@@ -64,14 +64,21 @@ def inspect_items(monkey):
             print(f'Worry level is multiplied by {monkey.opperation[1]} to {worry_level}')
         
         removeListIndex = []
-     
-    #TODO Write the test function
+        return worry_level
 
+      
+
+#TODO Write the test function
+def test(monkey):
+    if worry_level % monkey.divisible_by == 0:
+        
+        monkeys[monkey.if_true_throw_to].items.append()
+    else:
+        pass
 
     #If thrown remove thrown items from this monkeys item list
     for index in removeListIndex:
-        monkey.items.pop(index)   
-
+        monkey.items.pop(index) 
 
 def Monkey_in_the_middle(Monkeys):
     
@@ -83,7 +90,7 @@ def Monkey_in_the_middle(Monkeys):
         for monkey in Monkeys:
             print(f'monkey_number: {monkey.monkey_number}')
 
-            inspect_items(monkey)
+            updated_worry = inspect_items(monkey)
 
         print("\n****************************")
 
