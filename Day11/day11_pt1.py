@@ -47,7 +47,7 @@ def parse_input():
 
 def inspect_items(monkey):
     
-    for item, index in enumerate(monkey.items):
+    for item in monkey.items:
         
         #update worrylevel
         print(f'\tMonkey inspects an item with a worry level of {item}')
@@ -58,32 +58,33 @@ def inspect_items(monkey):
         
         if monkey.opperation[0] == '+':
             worry_level = item + int(monkey.opperation[1])
-            print(f'Worry level is increased by {monkey.opperation[1]} to {worry_level}')
+            print(f'\tWorry level is increased by {int(monkey.opperation[1])} to {worry_level}')
         elif monkey.opperation[0] == '*':
             worry_level = item * int(monkey.opperation[1])
-            print(f'Worry level is multiplied by {monkey.opperation[1]} to {worry_level}')
+            print(f'\tWorry level is multiplied by {int(monkey.opperation[1])} to {worry_level}')
         
-        removeListIndex = []
+
+        worry_level = worry_level // 3
+        print(f'\tMonkey gets bored with item. Worry level is divided by 3 to {worry_level}')
+
         return worry_level
 
-      
 
-#TODO Write the test function
-def test(monkey):
-    if worry_level % monkey.divisible_by == 0:
-        
-        monkeys[monkey.if_true_throw_to].items.append()
+def test(current_monkey, worry_level):
+    throw_to = None
+    if worry_level % current_monkey.divisible_by == 0:
+        print(f'\tCurrent worry level is divisible by {current_monkey.divisible_by}.')
+        throw_to = current_monkey.if_true_throw_to
     else:
-        pass
+        print(f'\tCurrent worry level is not divisible by {current_monkey.divisible_by}.')
+        throw_to = current_monkey.if_false_throw_to
 
-    #If thrown remove thrown items from this monkeys item list
-    for index in removeListIndex:
-        monkey.items.pop(index) 
+    return throw_to
 
 def Monkey_in_the_middle(Monkeys):
     
     #Run for 20 Rounds
-    for round in range(1,21):
+    for round in range(1,2):
         print(f'Round: {round} Start:\n')
         
         #For each round go one Monkey at a time.
@@ -91,15 +92,16 @@ def Monkey_in_the_middle(Monkeys):
             print(f'monkey_number: {monkey.monkey_number}')
 
             updated_worry = inspect_items(monkey)
-
+            throw_to = test(monkey, updated_worry)
+            #TODO Update where to throw to and remove the item from current monkey
         print("\n****************************")
 
 
 if __name__ == "__main__":
     Monkeys = parse_input()
     
-    for obj in Monkeys:
-        print(obj.__str__())
+    #for obj in Monkeys:
+        #print(obj.__str__())
 
     Monkey_in_the_middle(Monkeys)
 
