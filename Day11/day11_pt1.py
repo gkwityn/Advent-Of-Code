@@ -46,7 +46,7 @@ def parse_input():
 
 
 def inspect_items(monkey):
-    
+    #TODO fix this.. breaks for loop with return
     for item in monkey.items:
         
         #update worrylevel
@@ -67,7 +67,7 @@ def inspect_items(monkey):
         worry_level = worry_level // 3
         print(f'\tMonkey gets bored with item. Worry level is divided by 3 to {worry_level}')
 
-        return worry_level
+        return worry_level, item
 
 
 def test(current_monkey, worry_level):
@@ -90,9 +90,13 @@ def Monkey_in_the_middle(Monkeys):
         #For each round go one Monkey at a time.
         for monkey in Monkeys:
             print(f'monkey_number: {monkey.monkey_number}')
-
-            updated_worry = inspect_items(monkey)
-            throw_to = test(monkey, updated_worry)
+            
+            updated_worry, item = inspect_items(monkey)
+            throw_to, item = test(monkey, updated_worry)
+            
+            #TODO does throw happen at end of round?
+            Monkeys[throw_to].append(item)
+            
             #TODO Update where to throw to and remove the item from current monkey
         print("\n****************************")
 
