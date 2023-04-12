@@ -94,10 +94,11 @@ def Monkey_in_the_middle(Monkeys):
             updated_worry, item = inspect_items(monkey)
             throw_to, item = test(monkey, updated_worry)
             
-            #TODO does throw happen at end of round?
             Monkeys[throw_to].append(item)
             
-            #TODO Update where to throw to and remove the item from current monkey
+            #Clear current monkey item list after inpecting all of the items
+            monkey.items = None
+    
         print("\n****************************")
 
 
