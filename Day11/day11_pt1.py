@@ -46,8 +46,8 @@ def parse_input():
     return Monkeys
 
 
-def inspect_items(monkey):
-    #TODO fix this.. breaks for loop with return
+def inspect_items(monkey, Monkeys):
+    #
     for item in monkey.items:
         
         #update worrylevel
@@ -59,16 +59,31 @@ def inspect_items(monkey):
         
         if monkey.opperation[0] == '+':
             worry_level = item + int(monkey.opperation[1])
-            print(f'\tWorry level is increased by {int(monkey.opperation[1])} to {worry_level}')
+            print(f'\t  Worry level is increased by {int(monkey.opperation[1])} to {worry_level}')
         elif monkey.opperation[0] == '*':
             worry_level = item * int(monkey.opperation[1])
-            print(f'\tWorry level is multiplied by {int(monkey.opperation[1])} to {worry_level}')
+            print(f'\t  Worry level is multiplied by {int(monkey.opperation[1])} to {worry_level}')
         
 
         worry_level = worry_level // 3
-        print(f'\tMonkey gets bored with item. Worry level is divided by 3 to {worry_level}')
+        print(f'\t  Monkey gets bored with item. Worry level is divided by 3 to {worry_level}')
 
-        return worry_level, item
+
+        throw_to = test(monkey, worry_level)
+        print(f'\t  Item with worry level {worry_level} is thrown to monkey {throw_to}.')
+        Monkeys[throw_to].items.append(item)
+
+        
+
+        count_list[int(monkey.monkey_number.strip(':'))] += 1
+
+        print('')
+    
+    #Clear current monkey item list after inpecting all of the items
+    monkey.items = []
+
+    return
+        
 
 
 def test(current_monkey, worry_level):
@@ -83,31 +98,31 @@ def test(current_monkey, worry_level):
     return throw_to
 
 def Monkey_in_the_middle(Monkeys):
+    global count_list
+    
+    #TODO Change for TEST.txt
+    count_list = [0,0,0,0]
     
     #Run for 20 Rounds
-    for round in range(1,2):
+    for round in range(1,21):
         print(f'Round: {round} Start:\n')
         
         #For each round go one Monkey at a time.
         for monkey in Monkeys:
             print(f'monkey_number: {monkey.monkey_number}')
             
-            updated_worry, item = inspect_items(monkey)
-            throw_to, item = test(monkey, updated_worry)
-            
-            Monkeys[throw_to].append(item)
-            
-            #Clear current monkey item list after inpecting all of the items
-            monkey.items = None
-    
+            inspect_items(monkey, Monkeys)
+
         print("\n****************************")
+
+        print(count_list)
 
 
 if __name__ == "__main__":
     Monkeys = parse_input()
     
-    #for obj in Monkeys:
-        #print(obj.__str__())
+    # for obj in Monkeys:
+    #     print(obj.__str__())
 
     Monkey_in_the_middle(Monkeys)
 
