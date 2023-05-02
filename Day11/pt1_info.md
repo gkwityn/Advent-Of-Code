@@ -128,6 +128,8 @@ Monkey 3:
     Monkey gets bored with item. Worry level is divided by 3 to 1046.
     Current worry level is not divisible by 17.
     Item with worry level 1046 is thrown to monkey 1.
+
+    
 After round 1, the monkeys are holding items with these worry levels:
 
 Monkey 0: 20, 23, 27, 26

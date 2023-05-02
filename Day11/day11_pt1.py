@@ -47,11 +47,11 @@ def parse_input():
 
 
 def inspect_items(monkey, Monkeys):
-    #
+    
     for item in monkey.items:
         
         #update worrylevel
-        print(f'\tMonkey inspects an item with a worry level of {item}')
+        #print(f'\tMonkey inspects an item with a worry level of {item}')
         worry_level = None
         if monkey.opperation[1] == "old\n":
             monkey.opperation[1] = item
@@ -59,25 +59,21 @@ def inspect_items(monkey, Monkeys):
         
         if monkey.opperation[0] == '+':
             worry_level = item + int(monkey.opperation[1])
-            print(f'\t  Worry level is increased by {int(monkey.opperation[1])} to {worry_level}')
+            #print(f'\t  Worry level is increased by {int(monkey.opperation[1])} to {worry_level}')
         elif monkey.opperation[0] == '*':
             worry_level = item * int(monkey.opperation[1])
-            print(f'\t  Worry level is multiplied by {int(monkey.opperation[1])} to {worry_level}')
+            #print(f'\t  Worry level is multiplied by {int(monkey.opperation[1])} to {worry_level}')
         
-
         worry_level = worry_level // 3
-        print(f'\t  Monkey gets bored with item. Worry level is divided by 3 to {worry_level}')
-
+        #print(f'\t  Monkey gets bored with item. Worry level is divided by 3 to {worry_level}')
 
         throw_to = test(monkey, worry_level)
-        print(f'\t  Item with worry level {worry_level} is thrown to monkey {throw_to}.')
-        Monkeys[throw_to].items.append(item)
-
-        
+        #print(f'\t  Item with worry level {worry_level} is thrown to monkey {throw_to}.')
+        Monkeys[throw_to].items.append(worry_level)
 
         count_list[int(monkey.monkey_number.strip(':'))] += 1
 
-        print('')
+        #print('')
     
     #Clear current monkey item list after inpecting all of the items
     monkey.items = []
@@ -89,13 +85,20 @@ def inspect_items(monkey, Monkeys):
 def test(current_monkey, worry_level):
     throw_to = None
     if worry_level % current_monkey.divisible_by == 0:
-        print(f'\tCurrent worry level is divisible by {current_monkey.divisible_by}.')
+        #print(f'\tCurrent worry level is divisible by {current_monkey.divisible_by}.')
         throw_to = current_monkey.if_true_throw_to
     else:
-        print(f'\tCurrent worry level is not divisible by {current_monkey.divisible_by}.')
+        #print(f'\tCurrent worry level is not divisible by {current_monkey.divisible_by}.')
         throw_to = current_monkey.if_false_throw_to
 
     return throw_to
+
+
+def print_monkey_overview(Monkeys):
+    for monkey in Monkeys:
+        print(f'monkey_number: {monkey.monkey_number} - {monkey.items}')
+        #print(len(monkey.items))
+
 
 def Monkey_in_the_middle(Monkeys):
     global count_list
@@ -105,17 +108,17 @@ def Monkey_in_the_middle(Monkeys):
     
     #Run for 20 Rounds
     for round in range(1,21):
-        print(f'Round: {round} Start:\n')
+        print(f'Round: {round}:\n')
         
         #For each round go one Monkey at a time.
         for monkey in Monkeys:
-            print(f'monkey_number: {monkey.monkey_number}')
-            
+            #print(f'monkey_number: {monkey.monkey_number}')
             inspect_items(monkey, Monkeys)
-
+            
+        print_monkey_overview(Monkeys)
         print("\n****************************")
 
-        print(count_list)
+        #print(count_list)
 
 
 if __name__ == "__main__":
