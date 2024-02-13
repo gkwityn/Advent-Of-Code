@@ -9,10 +9,24 @@ function isNumber(str) {
 
     let getDigits = "";
     let firstLast = "";
+
+    const numbers = {'one': 1, 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'};
     
     for (let i = 0; i < str.length; i++) {
       if (!isNaN(str[i])) {
         getDigits += str[i]; 
+      }
+      else{
+        let mySubstr = '';
+        for(let j = i; j <str.length; j++){
+            if (isNaN(str[j])){
+                mySubstr += str[j];
+            }
+            if( mySubstr in numbers){
+                
+            }
+        }
+
       }
     }
     getDigits = getDigits.trim();
@@ -34,8 +48,6 @@ for (const line of lines) {
     numArray.push(isNumber(line));
 }
 
-console.log(numArray);
-console.log(numArray[numArray.length-1]);
 
 const sum = numArray.reduce((a,b) => a+b);
 console.log(`Total Sum: ${sum}`);
