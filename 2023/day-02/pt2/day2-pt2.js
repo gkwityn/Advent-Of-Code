@@ -55,19 +55,19 @@ function playGame(line){
 
             switch(pullColor){
                 case 'blue':{
-                    if(pullNumber <= roundResults.blue){
+                    if(pullNumber > roundResults.blue ){
                         roundResults.blue = pullNumber;
                     }
                     break;                    
                 }
                 case 'green':{
-                    if(pullNumber <= roundResults.green){
+                    if(pullNumber > roundResults.green ){
                         roundResults.green = pullNumber;
                     }
                     break;
                 }
                 case 'red':{
-                    if(pullNumber <= roundResults.red){
+                    if(pullNumber > roundResults.red ){
                         roundResults.red = pullNumber;
                     }
                     break;
@@ -80,10 +80,10 @@ function playGame(line){
     }
 
     // 12 red cubes, 13 green cubes, and 14 blue
-    if( roundResults.red > 12 ||
-        roundResults.green > 13 ||
-        roundResults.blue > 14){
-        return 0;
+    if( roundResults.red <= 12 ||
+        roundResults.green <= 13 ||
+        roundResults.blue <= 14){
+        return roundResults.red * roundResults.green * roundResults.blue;
     }
     else{
         return parseInt(split[0].split(' ')[1]);
