@@ -1,8 +1,5 @@
 
 const extractPartNumber = (line) =>{
-    
-
-    
 
     let partNubersArray = [];
     
@@ -12,7 +9,6 @@ const extractPartNumber = (line) =>{
 
     //Remove split string on delimiter(.) and remove empty strings
     let tokenArray = line.split(/([$@*#+%&=/.-])/).filter(el => el);
-
 
 
     const result = tokenArray.map(item => {

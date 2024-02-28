@@ -1,8 +1,10 @@
 const { linen } = require('color-name');
+const extractPartNumber = require('./extractPartNumber');
 
 function readFile(args){
-    console.log("Running Day3-pt1");
-    console.log(args);
+    console.log("\n--Running Day3-pt1--\n");
+    
+    console.log(`args: ${args}`);
 
     if (args.length === 2 ) {
         console.error('Expected data file!');
@@ -36,13 +38,17 @@ function checkPartNumber(){
 
 function main(args){
     const input = readFile(args);
-    console.log(input);
+    // console.log(input);
 
 
-    for(let line = 0; line < input.length; i++){
-        if(line == 0){
-            
-        }
+    for(const line of input){
+        console.log(`${line}`);
+        console.log(extractPartNumber(line));
+        console.log();
+
+        // for(item of line){
+        //     console.log(`\t ${extractPartNumber(line)}`);
+        // }
     }
 
     

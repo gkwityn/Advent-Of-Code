@@ -18,5 +18,8 @@
   "homepage": "https://github.com/gkwityn/Advent-Of-Code#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.12"
   }
 }
