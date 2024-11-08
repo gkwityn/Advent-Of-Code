@@ -1,4 +1,3 @@
-const { linen } = require('color-name');
 const extractPartNumber = require('./extractPartNumber');
 
 function readFile(args){
@@ -15,7 +14,6 @@ function readFile(args){
         process.exit(1);
     }
     
-
     const file = args[2];
     const fs = require('fs');
 
@@ -40,7 +38,6 @@ function main(args){
     const input = readFile(args);
     // console.log(input);
 
-
     for(const line of input){
         console.log(`${line}`);
         console.log(extractPartNumber(line));
@@ -50,10 +47,7 @@ function main(args){
         //     console.log(`\t ${extractPartNumber(line)}`);
         // }
     }
-
-    
 }
 
 
-main(process.argv)
-
+main(process.argv);
