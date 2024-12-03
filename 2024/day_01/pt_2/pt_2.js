@@ -26,22 +26,24 @@ const extractNumbersfromLine = (lines) =>{
 
 
 const main = () =>{
-    const lines = readFileLines('./data_test.txt');
+    const lines = readFileLines('./data_final.txt');
     const nums = extractNumbersfromLine(lines);
 
     const left = nums[0];
     const right = nums[1];
     
     let results = [];
-    
-    for (const item in left){
-        let count = right.filter((item)=> left.includes(item)).length;
-         results.push(item * count);
-    }
 
-    console.log(results);
-    let final = results.reduce((total, num) => total + num, 0);
+    //Find number of each value of left array is in right array
+    for(item of left){
+        //filter and the right array base on left item and count
+        let countItem = right.filter(rightItem => rightItem === item ).length;
+        results.push(item * countItem );
+    }
     
+    // console.log(results);
+    
+    let final = results.reduce((total, num) => total + num, 0);    
     console.log(final);
 
 
