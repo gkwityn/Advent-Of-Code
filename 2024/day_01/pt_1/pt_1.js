@@ -7,7 +7,7 @@ function readFileLines(filePath) {
 }
 
 function substractNumbers (leftNums, rightNums){
-    return rightNums.map((num, index) => num -leftNums[index] );
+    return rightNums.map((num, index) => Math.abs(num - leftNums[index]) );
 }
 
 const extractNumbersfromLineAndSort = (lines) =>{
