@@ -1,20 +1,12 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
-
         {
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            // "skipFiles": [
-            //     "<node_internals>/**"
-            // ],
-            "program": "${file}",
-            // "args": ["${fileDirname}"],
+            "program": "${workspaceFolder}/day_02/pt_1/pt_1.js",
+            "cwd": "${workspaceFolder}/day_02/pt_1"
         }
     ]
 }
