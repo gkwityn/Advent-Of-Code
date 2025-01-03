@@ -18,27 +18,27 @@ const getMultiplyPaterns = (lines) =>{
     return matched;
 };
 
+const parseMul = (expr) =>{
+    const [a, b] = expr.match(/[0-9]{1,3}/gm);
+    return [a, b];
+}
+
+const multiply = (a, b) => a * b;
 
 
-// const parseMul = (expr) =>{
-//     expr.match(/d{3})
-// };
 
 function main(){
     const path = require('path');
     const filePath = path.join(__dirname, 'data_final.txt');
     const lines = readFileLines(filePath);
 
-    const matched = getMultiplyPaterns(lines);
-    // console.log(matched);
-    
-    // matched.forEach(expr => {
+    const matched = getMultiplyPaterns(lines);    
+    const parsed = matched.map(parseMul);
+    const sum = parsed.reduce((acc, pair) => {
+        acc + multiply(...pair)
+    }, 0);
 
-    // });
-
-
-
-
+    console.log(`The total is: ${sum}`);
 }
 
 main();
