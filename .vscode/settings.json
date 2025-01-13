@@ -1,4 +1,6 @@
 {
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": false,
     "python.terminal.executeInFileDir": true,
