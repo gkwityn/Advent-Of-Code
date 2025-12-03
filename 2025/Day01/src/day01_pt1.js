@@ -1,7 +1,3 @@
-const { EOF } = require('dns');
-
-require('console'); 
-console
 
 let readInput = () =>{
 
@@ -24,6 +20,28 @@ let readInput = () =>{
     }        
 };
 
+const parseLine = (line) => {
+    //example line: "L68"
+    const parts = [line.charAt(0), line.slice(1)];
+    const direction = parts[0];
+    const amount = parseInt(parts[1], 10);
+
+    return { direction, amount };
+};
+
+const moveDial = (currentPosition, move) => {
+    let newPosition = currentPosition + move;
+
+    if (newPosition > 100) {
+        newPosition = 100 - (newPosition - 100);
+    } else if (newPosition < 0) {
+        newPosition = -newPosition;
+    }
+
+    return newPosition;
+};
+
+
 let main = () => {
     data = readInput();
     
@@ -31,7 +49,9 @@ let main = () => {
     const readLines = (data) => data.split(/\r?\n/); 
     const lines = readLines(data); 
 
-    let lineNum = 0
+
+    let dialPosition = 50; 
+
     for (const line of lines) {
         console.log(`Line ${lineNum++}:`);
         console.log(line);
@@ -40,6 +60,11 @@ let main = () => {
 
 main();
 
+
+module.exports = {
+    parseLine,
+    moveDial
+};
 
 
 
