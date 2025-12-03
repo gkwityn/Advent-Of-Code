@@ -1,1 +1,0 @@
-console.log("Hello, Day 1 Part 1!");
